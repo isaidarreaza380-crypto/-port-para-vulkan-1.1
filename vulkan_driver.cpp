@@ -1,4 +1,4 @@
-// Vulkan driver selection on Android. DXVK needs Vulkan features that Qualcomm's own Adreno drivers often lack
+// Vulkan driver selection on Android DXVK needs Vulkan features that Qualcomm's own Adreno drivers often lack
 // (robustness2 null descriptors, extended dynamic state, ...), so on Adreno the port loads Mesa's Turnip driver
 // shipped in the APK, through libadrenotools (which gets a driver past Android's linker namespaces), and hands its
 // vkGetInstanceProcAddr to DXVK (DXVK_VK_GIPA, android/patches/dxvk-android.patch). Turnip is used only if it
@@ -26,7 +26,7 @@
 
 #include "turnip_load.h"
 
-// libadrenotools is built for API 29, where libc exports android_get_device_api_level; libmain targets API 26,
+// libaLogsdrenotools is built for API 29, where libc exports android_get_device_api_level; libmain targets API 26,
 // whose headers only have an inline version, so the Makefile points the symbol here (--defsym).
 extern "C" int protore_device_api_level() {
     char value[PROP_VALUE_MAX] = {};
@@ -38,7 +38,7 @@ namespace native {
 
 namespace {
 
-// Logs the system driver's GPU, for reports from phones where Turnip is not used. DXVK needs Vulkan 1.3: an older
+//  the system driver's GPU, for reports from phones where Turnip is not used. DXVK needs Vulkan 1.3: an older
 // system driver (Qualcomm's for Adreno 6xx/710 on many phones) cannot run the game, so say that plainly instead of
 // letting DXVK fail later with "no adapters found".
 // The system driver's GPU and Vulkan version (0 when it has no device); logged.
